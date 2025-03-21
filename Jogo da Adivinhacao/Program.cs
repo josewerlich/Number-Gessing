@@ -2,47 +2,94 @@
 {
     internal class Program
     {
-        // Version 3: Validate if player guessed the correct number
+        // Version 4: Guess the number multiple times
         static void Main(string[] args)
         {
-            Console.WriteLine("---------------------------------");
-            Console.WriteLine("Guess the Number");
-            Console.WriteLine("---------------------------------");
+            while (true)
 
-            // guessing logic
-
-            Random numberGenerator = new Random();
-
-            int secretNumber = numberGenerator.Next(1, 21);
-
-            Console.Write("Type a number from 1 to 20: ");
-            int guessedNumber = Convert.ToInt32(Console.ReadLine());
-
-            if(guessedNumber == secretNumber)
             {
+                Console.Clear();
                 Console.WriteLine("---------------------------------");
-                Console.WriteLine("Congratulations, you guessed the secret number");
+                Console.WriteLine("Guess the Number");
                 Console.WriteLine("---------------------------------");
 
+                //levels
+
+                Console.WriteLine("Levels");
+                Console.WriteLine("---------------------------------");
+                Console.WriteLine("1 - Easy (10 guesses)");
+                Console.WriteLine("2 - Medium (5 guesses)");
+                Console.WriteLine("3 - Hard (3 guesses)");
+                Console.WriteLine("---------------------------------");
+
+                int totalGuesses = 0;
+
+                Console.WriteLine("Select a level: ");
+                string level = Console.ReadLine();
+
+                if (level == "1")
+                    totalGuesses = 10;
+
+                else if (level == "2")
+                    totalGuesses = 5;
+
+                else
+                    totalGuesses = 3;
+
+                // random number
+
+                Random numberGenerator = new Random();
+
+                int secretNumber = numberGenerator.Next(1, 21);
+
+                // game logic
+
+                for (int guessing = 1; guessing <= totalGuesses; guessing++)
+                {
+                    
+                    Console.WriteLine("---------------------------------");
+                    Console.WriteLine($"Guessing {guessing} of {totalGuesses}");
+                    Console.WriteLine("---------------------------------");
+                    Console.Write("Type a number from 1 to 20: ");
+                    int guessedNumber = Convert.ToInt32(Console.ReadLine());
+
+                    if (guessedNumber == secretNumber)
+                    {
+                        Console.WriteLine("---------------------------------");
+                        Console.WriteLine("Congratulations, you guessed the secret number");
+                        Console.WriteLine("---------------------------------");
+                        break;
+
+                    }
+                    else if (guessedNumber > secretNumber)
+                    {
+
+                        Console.WriteLine("---------------------------------");
+                        Console.WriteLine("The guessed number is higher than the secret number");
+                        Console.WriteLine("---------------------------------");
+
+                    }
+
+                    else
+                    {
+
+                        Console.WriteLine("---------------------------------");
+                        Console.WriteLine("The guessed number is lower than the secret number");
+                        Console.WriteLine("---------------------------------");
+
+                    }
+
+                  
+                }
+
+                
+                Console.WriteLine("Do you want to try again? Press Y/N ");
+                string toContinue = Console.ReadLine().ToUpper();
+
+                if (toContinue != "Y")
+                    break;
             }
-            else if (guessedNumber > secretNumber)
-            {
-                Console.WriteLine("---------------------------------");
-                Console.WriteLine("The guessed number is higher than the secret number");
-                Console.WriteLine("---------------------------------");
-
-            }
-
-            else
-            {
-                Console.WriteLine("---------------------------------");
-                Console.WriteLine("The guessed number is lower than the secret number");
-                Console.WriteLine("---------------------------------");
-            }
-                Console.WriteLine("You typed the number: " + guessedNumber);
-                Console.WriteLine("The secret number is: " + secretNumber);
-
-            Console.ReadLine();
         }
+        
     }
 }
