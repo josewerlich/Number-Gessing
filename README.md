@@ -59,7 +59,7 @@ A simple number guessing game written in C# where the player tries to guess a ra
 3. Build and run the project using .NET:
    ```sh
    dotnet build
-   dotnet run
+   dotnet run 
    ```
 
 ## Usage
