@@ -1,8 +1,10 @@
-﻿namespace Jogo_da_Adivinhacao
+﻿using System.ComponentModel.Design;
+
+namespace Jogo_da_Adivinhacao
 {
     internal class Program
     {
-        // Version 6: Player Score 
+        // Version 7: Update the logic for the player to lose if he does not guess the number 
         // Player will start with 100 points
         static void Main(string[] args)
         {
@@ -70,37 +72,45 @@
                     int guessedNumber = Convert.ToInt32(Console.ReadLine());
 
                     guessedNumberHistorical[historicalCount] = $"{guessedNumber}";
-                    
 
-                   
-
-                    if (guessedNumber == secretNumber)
-                    {
-                        Console.WriteLine("---------------------------------");
-                        Console.WriteLine("Congratulations, you guessed the secret number");
-                        Console.WriteLine("---------------------------------");
-                        break;
-
-                    }
-                    else if (guessedNumber > secretNumber)
+                    if (guessing != totalGuesses)
                     {
 
-                        Console.WriteLine("---------------------------------");
-                        Console.WriteLine("The secret number is lower");
-                        Console.WriteLine("---------------------------------");
-                        playerScore = playerScore - (guessedNumber - secretNumber);
+
+                        if (guessedNumber == secretNumber)
+                        {
+                            Console.WriteLine("---------------------------------");
+                            Console.WriteLine("Congratulations, you guessed the secret number");
+                            Console.WriteLine("---------------------------------");
+                            break;
+
+                        }
+                        else if (guessedNumber > secretNumber)
+                        {
+
+                            Console.WriteLine("---------------------------------");
+                            Console.WriteLine("The secret number is lower");
+                            Console.WriteLine("---------------------------------");
+                            playerScore = playerScore - (guessedNumber - secretNumber);
+
+                        }
+
+                        else
+                        {
+
+                            Console.WriteLine("---------------------------------");
+                            Console.WriteLine("The secret number is higher");
+                            Console.WriteLine("---------------------------------");
+                            playerScore = playerScore - (secretNumber - guessedNumber);
+
+
+                        }
                         
                     }
-
                     else
                     {
-
-                        Console.WriteLine("---------------------------------");
-                        Console.WriteLine("The secret number is higher");
-                        Console.WriteLine("---------------------------------");
-                        playerScore = playerScore - (secretNumber - guessedNumber);
-                        
-
+                        Console.WriteLine("You lost! Good luck next time...");
+                        playerScore = 0;
                     }
 
                     historicalCount++;
