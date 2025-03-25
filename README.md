@@ -71,4 +71,8 @@ A simple number guessing game written in C# where the player tries to guess a ra
 
 Contributions are welcome! Feel free to submit issues or pull requests to improve the game.
 
+## Technologies 
+
+[![My Skills](https://skillicons.dev/icons?i=git,github,cs,dotnet,visualstudio)](https://skillicons.dev)
+
 
