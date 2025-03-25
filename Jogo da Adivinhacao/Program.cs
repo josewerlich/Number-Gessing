@@ -2,12 +2,15 @@
 {
     internal class Program
     {
-        // Version 5: Saving the number guesses
+        // Version 6: Player Score 
+        // Player will start with 100 points
         static void Main(string[] args)
         {
 
             string[] guessedNumberHistorical = new string[100];
             int historicalCount = 0;
+
+            
 
             while (true)
 
@@ -46,6 +49,8 @@
 
                 int secretNumber = numberGenerator.Next(1, 21);
 
+                int playerScore = 100;
+
                 // game logic
 
                 Console.Clear() ;
@@ -81,23 +86,27 @@
                     {
 
                         Console.WriteLine("---------------------------------");
-                        Console.WriteLine("The guessed number is higher than the secret number");
+                        Console.WriteLine("The secret number is lower");
                         Console.WriteLine("---------------------------------");
-
+                        playerScore = playerScore - (guessedNumber - secretNumber);
+                        
                     }
 
                     else
                     {
 
                         Console.WriteLine("---------------------------------");
-                        Console.WriteLine("The guessed number is lower than the secret number");
+                        Console.WriteLine("The secret number is higher");
                         Console.WriteLine("---------------------------------");
+                        playerScore = playerScore - (secretNumber - guessedNumber);
+                        
 
                     }
 
                     historicalCount++;
                 }
-
+                 
+                Console.WriteLine("Score: " + playerScore);
                 
                 Console.WriteLine("Do you want to try again? Press Y/N ");
                 string toContinue = Console.ReadLine().ToUpper();
