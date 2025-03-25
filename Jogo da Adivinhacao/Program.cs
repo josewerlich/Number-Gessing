@@ -2,9 +2,13 @@
 {
     internal class Program
     {
-        // Version 4: Guess the number multiple times
+        // Version 5: Saving the number guesses
         static void Main(string[] args)
         {
+
+            string[] guessedNumberHistorical = new string[100];
+            int historicalCount = 0;
+
             while (true)
 
             {
@@ -44,14 +48,26 @@
 
                 // game logic
 
+                Console.Clear() ;
+
                 for (int guessing = 1; guessing <= totalGuesses; guessing++)
                 {
-                    
+                    for (int counter = 0; counter < historicalCount; counter++)
+                    {
+                        Console.WriteLine("Hitorical number: " + $" {guessedNumberHistorical[counter]}");
+                    }
+
+
                     Console.WriteLine("---------------------------------");
                     Console.WriteLine($"Guessing {guessing} of {totalGuesses}");
                     Console.WriteLine("---------------------------------");
                     Console.Write("Type a number from 1 to 20: ");
                     int guessedNumber = Convert.ToInt32(Console.ReadLine());
+
+                    guessedNumberHistorical[historicalCount] = $"{guessedNumber}";
+                    
+
+                   
 
                     if (guessedNumber == secretNumber)
                     {
@@ -79,12 +95,14 @@
 
                     }
 
-                  
+                    historicalCount++;
                 }
 
                 
                 Console.WriteLine("Do you want to try again? Press Y/N ");
                 string toContinue = Console.ReadLine().ToUpper();
+
+                historicalCount = 0;
 
                 if (toContinue != "Y")
                     break;
